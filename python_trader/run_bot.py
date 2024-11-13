@@ -1,6 +1,7 @@
 from alpaca_trader import Alpacatrader 
 from portfolio import Portfolio
 from stock_frame import StockFrame
+from alpaca_historical_data import AlpacaHistData
 
 def main(): 
 
@@ -30,9 +31,7 @@ def main():
 
     #------------------------------ TEST CASE 3: Testing Data_Frame--------------------------------
 
-    
-
-    data = {
+    """data = {
                 "datetime": 1586390396750,
                 "symbol": "MSFT",
                 "close": 165.7,
@@ -58,9 +57,18 @@ def main():
     ]
     
     df.add_row(new_data)
-    print("DataFrame after adding a row:\n", df.frame)
+    print("DataFrame after adding a row:\n", df.frame)"""
 
-
+    #------------------------------ TEST CASE 4: Requesting Historical Crypto Data from Alpaca--------------------------------
+    symbol = "BTC/USD"
+    #start_date = "2022-09-01"
+    #end_date = "2022-09-07"
+    
+    # Create an instance of the AlpacaHistData class
+    data = AlpacaHistData(symbol)
+    
+    # Access and print the DataFrame returned by the request
+    print(data.request_param)
 
 if __name__ == "__main__":
     main()
