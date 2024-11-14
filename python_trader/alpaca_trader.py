@@ -12,10 +12,12 @@ from typing import List
 from typing import Dict
 from typing import Union 
 
+from alpaca_trade_api.stream import Stream
+
 class Alpacatrader():
     
     """This method runs when the object is initialized"""
-    def __init__(self, client_id: str, secret_key: str, base_url: str = 'https://paper-api.alpaca.markets') -> None:
+    def __init__(self, client_id: str, secret_key: str, symbol: str) -> None:
         """_summary_
 
         Args:
@@ -24,14 +26,13 @@ class Alpacatrader():
             base_url (str, optional): . Defaults to None.
             trading_account (str, optional): Help us determine where are we going to place those trades. Defaults to None.
         """        
-        #self.trading_account: str = trading_account
+    
         self.client_id: str = client_id
         self.secret_key: str = secret_key
-        self.base_url: str = base_url
+        self.symbol: str = symbol
         self.session = self._create_session()
-        #self.trades: dict = {}
-        #self.historical_prices: dict = {}
-        #self.stock_frame = None
+        self.stream = Stream(self.client_id, self.secret_key, base_url="wss://stream.data.alpaca.markets/v1beta1/crypto", raw_data=True)
+   
 
     def _create_session(self) -> REST:
         """_summary_
@@ -42,10 +43,42 @@ class Alpacatrader():
         alpaca_client = REST(
             key_id=self.client_id,
             secret_key=self.secret_key,
-            base_url=self.base_url
+            base_url="https://paper-api.alpaca.markets"
         )
 
         return alpaca_client
+    
+    async def print_quote(self, q):
+        """Callback to print incoming quote data."""
+        print('quote', q)
+
+    async def print_trade(self, t):
+        """Callback to print incoming trade data."""
+        print('trade', t)
+
+    async def print_bar(self, bar):
+        """Callback to print incoming bar data."""
+        print('bar', bar)
+
+    def start_streaming(self): 
+
+        self.stream.subscribe_crypto_quotes(self.print_quote, self.symbol)
+        self.stream.subscribe_crypto_trades(self.print_trade, self.symbol)
+
+        '''# Subscribe to bars
+        @self.stream.on_bar(self.symbol)
+        async def on_bar(bar):
+            print('bar', bar)'''
+
+        self.stream.subscribe_crypto_bars(self.print_bar, self.symbol)
+
+        # Run the stream
+        self.stream.run()
+    
+
+    
+
+ #---------------------------------------------------------------
     
 @property
 def pre_market_open(self) -> bool:

@@ -44,5 +44,7 @@ class AlpacaHistData():
         if btc_bars.df.empty:
             print("No data available for the given symbol and date range.")
         return btc_bars.df
+    
+    
 
         
