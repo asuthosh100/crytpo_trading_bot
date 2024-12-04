@@ -9,14 +9,14 @@ def main():
 
     #-------------------- TEST CASE 1: Creating an Alpaca Session--------------------------------
 
-    API_KEY = 'PKVUX2M5K5YZWCK8E2JN'
-    SECRET_KEY = 'yiK5aTBDK0VRjaVSTjeZHaqHMPbMCndkWNYrh9Hcl'
+    '''API_KEY = ''
+    SECRET_KEY = ''
     symbol = 'BTC/USD'
-    alpaca_trader = Alpacatrader(client_id=ALPACA_API_KEY, secret_key=ALPACA_SECRET_KEY,symbol=symbol)
+    alpaca_trader = Alpacatrader(client_id=API_KEY, secret_key=SECRET_KEY,symbol=symbol)
     print("Alpaca Session Created: ", alpaca_trader.session) 
     #alpaca_trader.start_streaming()
 
-    '''stream = CryptoDataStream(
+    stream = CryptoDataStream(
     api_key=API_KEY,
     secret_key=SECRET_KEY,
     )
@@ -76,7 +76,7 @@ def main():
     print("DataFrame after adding a row:\n", df.frame)"""
 
     #------------------------------ TEST CASE 4: Requesting Historical Crypto Data from Alpaca--------------------------------
-    '''symbol = "BTC/USD"
+    symbol = "BTC/USD"
     #start_date = "2022-09-01"
     #end_date = "2022-09-07"
     
@@ -84,7 +84,7 @@ def main():
     data = AlpacaHistData(symbol)
     
     # Access and print the DataFrame returned by the request
-    print(data.request_param)'''
+    print(data.request_param)
 
     #------------------------------ TEST CASE 4: Requesting Real Time Crypto Data from Alpaca--------------------------------
 

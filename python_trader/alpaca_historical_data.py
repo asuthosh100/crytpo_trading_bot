@@ -35,7 +35,7 @@ class AlpacaHistData():
         print(f"Symbol: {self.symbol}")
         print(f"Timeframe: {TimeFrame.Day}")
         print(f"Start date: 2022-09-01")
-        print(f"End date: 2022-09-07")
+        print(f"End date: 2022-09-20")
 
         btc_bars = self.client.get_crypto_bars(request_params)
 
